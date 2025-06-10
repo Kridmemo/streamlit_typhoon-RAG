@@ -1,3 +1,5 @@
+!pip install langchain langchain-community chromadb pymupdf sentence-transformers
+
 import streamlit as st
 from langchain.document_loaders import PyMuPDFLoader
 from langchain.text_splitter import CharacterTextSplitter
