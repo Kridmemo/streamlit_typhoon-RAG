@@ -57,7 +57,7 @@ if uploaded_file:
 
                 def ask_typhoon(chat_history):
                     headers = {
-                        "Authorization": f"Bearer {st.secrets['TYPHOON_API_KEY']}",
+                        "Authorization": "Bearer sk-HQqPVR5RVGvTKVFcDHRJdVRtH3sQnH3VqKPHyYr5hoFsBFDj",
                         "Content-Type": "application/json"
                     }
                     data = {
