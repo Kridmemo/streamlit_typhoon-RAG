@@ -1,4 +1,4 @@
-!pip install langchain langchain-community chromadb pymupdf sentence-transformers
+!pip  langchain langchain-community chromadb pymupdf sentence-transformers
 
 import streamlit as st
 from langchain.document_loaders import PyMuPDFLoader
