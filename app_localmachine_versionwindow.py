@@ -92,16 +92,4 @@ if user_input:
     st.write(response)
 
 
-# ตั้งค่า Auth Token ของ ngrok
-ngrok.set_auth_token("2ky4O7VCdeEAwsVQgws6wB6YjD5_2jjvwyMhCvfMFZK9og9wV")
 
-# เปิดพอร์ต 8501 ผ่าน ngrok
-public_url = ngrok.connect(8501)
-print(f"🌐 เปิดให้เข้าจากภายนอกที่: {public_url}")
-
-# รัน Streamlit ใน background
-def run_app():
-    os.system("streamlit run app.py")
-
-thread = threading.Thread(target=run_app)
-thread.start()
