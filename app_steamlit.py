@@ -2,19 +2,17 @@ import streamlit as st
 from langchain_community.document_loaders import PyMuPDFLoader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain.vectorstores import Chroma
 import requests
 import os
 import threading
 from pyngrok import ngrok
+from langchain.vectorstores import FAISS
 
-
-# โหลดและฝังเอกสาร (run แค่รอบแรก)
 @st.cache_resource
 def load_vectorstore():
     with st.status("กำลังโหลดเวกเตอร์จาก PDF...", expanded=True) as status:
         progress = st.progress(0, text="📄 Loading PDF...")
-        
+
         pdf_path = "คู่มือแนวทางการปฏิบัติงาน medwaste (1).pdf"
         loader = PyMuPDFLoader(pdf_path)
         documents = loader.load()
@@ -33,13 +31,10 @@ def load_vectorstore():
         )
         progress.progress(70, text="💾 สร้างเวกเตอร์สโตร์...")
 
-        vectordb = Chroma.from_texts(
+        vectordb = FAISS.from_texts(
             texts=documents,
-            embedding=embedding,
-            persist_directory="./chroma_db"
+            embedding=embedding
         )
-        vectordb.persist()
-
         progress.progress(100, text="✅ เสร็จสิ้น")
         status.update(label="โหลดเวกเตอร์เสร็จแล้ว ✅", state="complete")
         return vectordb.as_retriever()
