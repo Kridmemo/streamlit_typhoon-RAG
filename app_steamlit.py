@@ -5,7 +5,6 @@ from langchain_community.embeddings import HuggingFaceEmbeddings
 import requests
 import os
 import threading
-from pyngrok import ngrok
 from langchain.vectorstores import FAISS
 
 @st.cache_resource
