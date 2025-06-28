@@ -89,7 +89,7 @@ if user_input:
     selected_docs = docs[:3]
     context = "\n\n".join([doc.page_content for doc in selected_docs])
 
-    st.markdown("### 📄 Context ที่ใช้ในการตอบ:")
+    st.markdown("### 📄 Context ที่ใช้ในการตอบจาก คู่มือแนวทางการกำจัดขยะ:")
     for i, doc in enumerate(selected_docs):
         st.markdown(f"**Context {i+1}**: {doc.page_content.strip()}")
 
