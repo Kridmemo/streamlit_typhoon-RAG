@@ -6,6 +6,7 @@ import requests
 import os
 import threading
 from langchain.vectorstores import FAISS
+import base64
 
 # กำหนดพื้นหลังสีชมพูและรูปภาพโลโก้
 st.markdown(
