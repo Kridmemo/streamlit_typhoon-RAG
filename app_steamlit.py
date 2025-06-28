@@ -70,7 +70,7 @@ def ask_typhoon(chat_history):
     return res.json()["choices"][0]["message"]["content"]
 
 # ส่วนติดต่อผู้ใช้
-st.set_page_config(page_title="📚 RAG Chatbot - Medwaste", layout="wide")
+st.set_page_config(page_title="🗑 RAG Chatbot - Medwaste", layout="wide")
 st.title("🧪 ระบบ RAG Chatbot แนวทางกำจัดการขยะในโรงพยาบาลพรหมคีรี")
 
 # ใส่ system prompt
