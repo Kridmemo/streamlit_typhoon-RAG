@@ -14,9 +14,9 @@ st.markdown(
     <style>
     .stApp {{
         background-image: url("data:image/png;base64,{base64.b64encode(open('โลโก้โรงพยาบาลพรหมคีรี.png', 'rb').read()).decode()}");
-        background-size: 150px;
+        background-size: 100px;
         background-repeat: no-repeat;
-        background-position: center right;
+        background-position: top left;
         
     }}
     </style>
