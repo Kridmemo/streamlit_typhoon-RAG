@@ -26,31 +26,44 @@ st.markdown(
 
 @st.cache_resource
 def load_vectorstore():
-    with st.status("กำลังอ่านข้อมูลจาก คู่มือแนวทางการกำจัดขยะ...", expanded=True) as status:
-        progress = st.progress(0, text="📄 Loading PDF...")
+    with st.status("กำลังอ่านข้อมูลจากเอกสารหลายฉบับ...", expanded=True) as status:
+        progress = st.progress(0, text="📄 Loading PDFs...")
 
-        pdf_path = "คู่มือแนวทางการปฏิบัติงาน medwaste (1).pdf"
-        loader = PyMuPDFLoader(pdf_path)
-        documents = loader.load()
+        pdf_paths = [
+            "คู่มือวัสดุของเสียทางการแพทย์-รพ.พรหมคีรี-ใหม่.pdf",
+            "คู่มือการจัดการของเสียทางการแพทย์.pdf"
+        ]
+
+        documents = []
+        for i, path in enumerate(pdf_paths):
+            loader = PyMuPDFLoader(path)
+            docs = loader.load()
+            documents.extend(docs)
+
         progress.progress(20, text="✂️ ตัดข้อความ...")
 
         splitter = CharacterTextSplitter(separator="", chunk_size=1000, chunk_overlap=100)
         texts = splitter.split_documents(documents)
         for i, doc in enumerate(texts):
             doc.metadata["chunk_id"] = i
+
+        # หากต้องการจำกัดจำนวน chunk
         documents = [doc.page_content for doc in texts if doc.metadata["chunk_id"] <= 274]
+
         progress.progress(50, text="🔍 กำลังฝังข้อมูล (embedding)...")
 
         embedding = HuggingFaceEmbeddings(
             model_name="BAAI/bge-m3",
             model_kwargs={"device": "cpu"}
         )
+
         progress.progress(70, text="💾 สร้างเวกเตอร์สโตร์...")
 
         vectordb = FAISS.from_texts(
             texts=documents,
             embedding=embedding
         )
+
         progress.progress(100, text="✅ เสร็จสิ้น")
         status.update(label="โหลดเวกเตอร์เสร็จแล้ว ✅", state="complete")
         return vectordb.as_retriever()
