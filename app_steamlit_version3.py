@@ -32,7 +32,7 @@ def load_vectorstore():
             model_kwargs={"device": "cpu"}
         )
         vectordb = FAISS.load_local("medwaste_vectorstore", embedding, allow_dangerous_deserialization=True)
-        return vectordb.as_retriever())
+        return vectordb.as_retriever()
 
 # Typhoon API
 def ask_typhoon(chat_history):
