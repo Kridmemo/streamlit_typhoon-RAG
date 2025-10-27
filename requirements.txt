@@ -5,3 +5,4 @@ faiss-cpu
 pymupdf
 sentence-transformers
 requests
+langchain.text_splitter
